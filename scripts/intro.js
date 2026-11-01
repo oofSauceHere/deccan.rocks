@@ -8,34 +8,31 @@ const SCENES = document.querySelectorAll(".skit").length;
 // its useful to pair dialogue with functions in case something needs to happen at the same time a line of dialogue is read
 // i use this elsewhere, and since its a useful """paradigm""" i figured id explain it
 const DIALOGUE =  VISITED ? [
-    ["Welcome back!\nWhat kind of experience would you like?"],
+    ["Choose..."],
 ] : [
-    ["Oh, hello!\nYou... woke me up."],
-    ["I just sniffed your packets.\nThey smell new..."],
-    ["How exciting! Is this your first visit?\n(Surely you've never cleared your cache...)"],
-    ["Do you want something to drink?\nWater? Carrot juice?"],
-    ["Okay, we don't really have anything to drink.\nSorry... this is just a website."],
-    ["It's not even my website.\n(I just work here.)"],
-    ["We're also a little short-staffed.\nIt's just me and my friend Kiwi."],
-    ["She's hard at work getting things ready for you.\nI think.", (char) => {
+    ["Okay..."],
+    // can do a funny text and arrow here
+    ["...what? Oh, sorry, I'm Guava.\nThis is not my website."],
+    ["Officially, I'm the webmaster,\nwhich means something, I think."],
+    ["It definitely looks good on a resume.\nSpeaking of resumes..."],
+    ["This is not a walking talking resume.\nIt's barely a portfolio."],
+    ["So, if that's what you're here for...\nWell, here you go."],
+    ["And if that's not what you're here for...\nYou'll get to meet Kiwi!"],
+    ["Who's currently hard at work getting things ready.\nI think.", (char) => {
         if (char == '.') {
             setTimeout(() => {
                 document.getElementById("right").style.visibility = "visible";
             }, 250);
         }
     }],
-    ["Oh, right. My name is Guava!\nI'm the webmaster."],
-    ["Not that it means much.\n(It just looks good on a resume.)"],
-    ["Oh, sorry. I'm rambling.\nI'm excited to show you around! But first..."],
-    ["What kind of experience would you like?"],
+    ["I assume at this point you're wondering\nwhat this \"website\" is."],
+    ["Well, that depends.\nWhat do you want it to be?"],
 ];
 const RESPONSES = VISITED ? [
     "<span class=\"next\" onclick=\"load_simple()\" id=\"simple\">[←] simple</span>&emsp;&emsp;<span class=\"next\" onclick=\"load_complex()\" id=\"complex\">[→] lots of STUFF!</span>"
 ] : [
     "<span class=\"next\" onclick=\"advance()\">[↑] to continue</span>&emsp;&emsp;<span class=\"next\" onclick=\"skip_dialogue()\">[Enter] to skip</span>",
     "<span class=\"next\" onclick=\"advance()\">[↑]</span>",
-    "<span class=\"next\" onclick=\"advance()\">[↑]</span>", // first visit option
-    "<span class=\"next\" onclick=\"advance()\">[←] water</span>&emsp;&emsp;<span class=\"next\" onclick=\"advance()\" >[→] carrot juice</span>",
     "<span class=\"next\" onclick=\"advance()\">[↑]</span>",
     "<span class=\"next\" onclick=\"advance()\">[↑]</span>",
     "<span class=\"next\" onclick=\"advance()\">[↑]</span>",
@@ -88,7 +85,7 @@ async function load_intro_cutscene() {
     document.removeEventListener("keydown", progress);
 
     GUAVA.src = `images/guava/guava_${CURRENT_DIALOGUE}_talk.gif`;
-    const duration = type(["Okay! Simple. Got it."], "text");
+    const duration = type(["Okay!"], "text");
     setTimeout(() => {
         GUAVA.src = `images/guava/guava_${CURRENT_DIALOGUE}.gif`;
     }, duration);
@@ -102,7 +99,7 @@ async function load_intro_cutscene() {
 
     setTimeout(() => {
         GUAVA.src = `images/guava/guava_${CURRENT_DIALOGUE+1}_talk.gif`;
-        type(["...okay, that's not supposed to happen."], "text");
+        type(["...uh, that's not supposed to happen."], "text");
     }, 3500 + duration);
     setTimeout(() => {
         document.getElementById("page").style.animation = "fill 1.5s ease-in-out forwards";
@@ -158,7 +155,7 @@ async function load_intro_cutscene() {
 
     // await delay(500);
 
-    document.getElementById("guava2").src = "images/guava/guava_14.gif";
+    document.getElementById("guava2").src = `images/guava/guava_${DIALOGUE.length + 2}.gif`;
     document.getElementById("guava2").style.animation = "popup 1s ease forwards";
 
     await delay(500);
@@ -167,18 +164,17 @@ async function load_intro_cutscene() {
     const dialogue = [
         ["Kiwi, they said they wanted simple!", 0],
         ["THIS IS NOT SIMPLE!!!", 0],
-        ["it's pretty simple. it's my website!", 1],
-        ["No, it's not! Just let them use it normally.", 0],
-        ["i'm not stopping them from using it--", 1],
-        ["Clean it up!", 0],
-        ["like this?", 1, () => {
+        ["i don't know, it's pretty simple.", 1],
+        ["I told you not to break anything!", 0],
+        ["as a developer, that's my job--", 1],
+        ["Now it's your job to clean it up!", 0],
+        ["oh! like this?", 1, () => {
             document.getElementById("css").href = "styles/barebones.css";
         }],
-        ["No, Kiwi.", 0],
-        ["Stop messing around!!!\nChange it back and get rid of your name!", 0],
-        ["What if a recruiter's looking?", 0],
-        ["oh, im sorry. i forgot how much recruiters like wading through vibecoded slop.", 1],
-        ["they dont look at these anymore. and its all AI's fault. you know,--", 1],
+        ["No, Kiwi. Not like that.", 0],
+        ["Stop messing around!\nWhat if a recruiter's looking?", 0],
+        ["oh, im sorry. i forgot how much recruiters love wading through vibecoded slop.", 1],
+        ["they dont look at these anymore. so if you wanna blame someone, blame AI--", 1],
         ["Kiwi. Just fix it.", 0],
         ["ugh, fine. but, just so you know...", 1],
         ["the experience stopped being \"simple\" the moment they had to read dialogue.", 1],
@@ -213,13 +209,79 @@ async function load_simple() {
     GUAVA2.remove();
     document.getElementById("rainbowcontainer").remove();
     document.getElementById("main").style.visibility = "visible";
-    document.getElementById("title").innerHTML = "deccan<br/>&nbsp;.rocks";
+    // document.getElementById("title").innerHTML = "deccan<br/>&nbsp;.rocks";
+    document.getElementById("title").innerHTML = "web<br/>&nbsp;world";
     document.getElementById("copyright").innerHTML = "(c) 2026 Deccan. All Rights Reserved.";
     document.getElementsByTagName("title")[0].innerHTML = "deccan.rocks";
     document.getElementById("favicon").href = "images/favicon2.ico";
     document.getElementById("text2").innerHTML = "";
     document.getElementById("text3").innerHTML = "";
     document.querySelectorAll(".scene")[CURRENT_SCENE].style.visibility = "visible";
+
+    const scene_handler = {
+        "projects": () => {
+            document.getElementById("projectsscene").style.visibility = "visible";
+            const laptop = document.getElementById("laptop");
+            laptop.style.transform = "rotateY(135deg)";
+            laptop.animate([
+                {
+                    transform: "rotateY(135deg)",
+                }, {
+                    transform: "rotateY(315deg)",
+                }
+            ], {
+                duration: 500,
+                fill: "forwards",
+                easing: "ease-out",
+            });
+            // const screen = document.getElementById("screen");
+            // screen.style.transform = "translateZ(-20vh) rotateX(-90deg)";
+            // screen.animate([
+            //     {
+            //         transform: "translateZ(-20vh) rotateX(-90deg)",
+            //     }, {
+            //         transform: "translateZ(-20vh) rotateX(15deg)",
+            //     }
+            // ], {
+            //     duration: 500,
+            //     fill: "forwards",
+            //     easing: "ease-out",
+            // });
+            const terminal = document.getElementById("terminal");
+            terminal.style.transform = "translateY(-50px)";
+            terminal.animate([
+                {
+                    transform: "translateY(-50px)",
+                    opacity: 0,
+                }, {
+                    transform: "translateY(0)",
+                    opacity: 1,
+                }
+            ], {
+                duration: 500,
+                fill: "forwards",
+                easing: "ease-out",
+            });
+        },
+        "contact": () => {
+            document.getElementById("contactscene").style.visibility = "visible";
+            const contactform = document.getElementById("contactform");
+            contactform.style.transform = "translateY(-50px)";
+            contactform.animate([
+                {
+                    transform: "translateY(-50px)",
+                    opacity: 0,
+                }, {
+                    transform: "translateY(0)",
+                    opacity: 1,
+                }
+            ], {
+                duration: 500,
+                fill: "forwards",
+                easing: "ease-out",
+            });
+        },
+    }
 
     const select = (e) => {
         document.querySelectorAll(".navitem").forEach((el) => {
@@ -236,28 +298,9 @@ async function load_simple() {
             e.target.style.marginLeft = "auto";
             e.target.innerHTML = `>> ${e.target.innerHTML}`;
             e.target.style.pointerEvents = "none";
+            scene_handler[e.target.id]();
         } else {
             document.querySelectorAll(".skit")[(CURRENT_SCENE = (CURRENT_SCENE + 1)%SCENES)].style.visibility = "visible";
-        }
-
-        if(e.target.id == "contact") {
-            const contactform = document.getElementById("contactform");
-            // contactform.style.animation = "";
-            document.getElementById("contactscene").style.visibility = "visible";
-            contactform.style.transform = "translateY(-50px)";
-            contactform.animate([
-                {
-                    transform: "translateY(-50px)",
-                    opacity: 0,
-                }, {
-                    transform: "translateY(0)",
-                    opacity: 1,
-                }
-            ], {
-                duration: 500,
-                fill: "forwards",
-                easing: "ease-out",
-            });
         }
     }
 
@@ -305,7 +348,7 @@ function skip_dialogue() {
     document.getElementById("indicator").style.visibility = "visible";
     document.addEventListener("keydown", progress);
     document.getElementById("right").style.visibility = "hidden";
-    GUAVA.src = `images/guava/guava_${DIALOGUE.length-1}.gif`;
+    GUAVA.src = VISITED ? "images/guava/guava_13.gif" : `images/guava/guava_${DIALOGUE.length-1}.gif`;
     CURRENT_DIALOGUE = DIALOGUE.length;
 }
 
@@ -321,10 +364,8 @@ function skip(e) {
 
 // handle progression to the next dialogue
 function progress(e) {
-    if(e.key == "ArrowUp" && (CURRENT_DIALOGUE < DIALOGUE.length && CURRENT_DIALOGUE != 4)) {
+    if(e.key == "ArrowUp" && CURRENT_DIALOGUE < DIALOGUE.length) {
         advance();
-    } else if (CURRENT_DIALOGUE == 4 && (e.key == "ArrowLeft" || e.key == "ArrowRight")) {
-        advance();  
     } else if(CURRENT_DIALOGUE == DIALOGUE.length) {
         if(e.key == "ArrowRight") {
             load_complex();
@@ -337,10 +378,10 @@ function progress(e) {
 // run entire dialogue sequence
 function advance() {
     document.getElementById("right").style.visibility = "hidden";
-    GUAVA.src = `images/guava/guava_${CURRENT_DIALOGUE}_talk.gif`;
+    GUAVA.src = VISITED ? "images/guava/guava_13_talk.gif" : `images/guava/guava_${CURRENT_DIALOGUE}_talk.gif`;
     const duration = type(DIALOGUE[CURRENT_DIALOGUE], "text");
     const t1 = setTimeout(() => {
-        GUAVA.src = `images/guava/guava_${CURRENT_DIALOGUE}.gif`;
+        GUAVA.src = VISITED ? "images/guava/guava_13.gif" : `images/guava/guava_${CURRENT_DIALOGUE}.gif`;
     }, duration);
     TIMEOUTS.push(t1);
 
@@ -361,8 +402,8 @@ function start() {
     GUAVA.onclick = "";
     GUAVA.style.pointerEvents = "none";
     GUAVA.src = "images/guava/guava_wake.gif";
-    document.getElementById("sign").style.animation = "spin2 10s 7.5s steps(72, end) infinite, leave 0.3s ease-out forwards, leave2 0.6s 0.3s ease-in forwards, jiggle 0.9s linear forwards";
-    document.getElementById("sign2").style.animation = "spin3 10s 7.5s steps(72, end) infinite, leave 0.3s ease-out forwards, leave2 0.6s 0.3s ease-in forwards, jiggle 0.9s linear forwards";
+    document.getElementById("sign").style.animation = "spin2 10s steps(72, end) infinite, leave 0.3s ease-out forwards, leave2 0.6s 0.3s ease-in forwards, jiggle 0.9s linear forwards";
+    document.getElementById("sign2").style.animation = "spin3 10s steps(72, end) infinite, leave 0.3s ease-out forwards, leave2 0.6s 0.3s ease-in forwards, jiggle 0.9s linear forwards";
     setTimeout(() => {
         document.getElementById("sign").remove();
         document.getElementById("sign2").remove();
@@ -384,10 +425,7 @@ window.onload = () => {
     if (VISITED) {
         document.getElementsByTagName("title")[0].innerHTML = "deccan.rocks";
         document.getElementById("favicon").href = "images/favicon2.ico"; // something different initially?
+        // TODO: skip wakeup
     }
     document.addEventListener("keydown", skip);
-
-    setTimeout(() => {
-        GUAVA.style.pointerEvents = "all";
-    }, 7500);
 }

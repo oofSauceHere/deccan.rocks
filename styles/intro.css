@@ -36,6 +36,7 @@
     --dark: #003797;
     --dark-accent: #002b76;
     --dark-accent-2: #002651;
+    --dark-accent-3: #0092e1;
     --light: white;
     --light-accent: lightgrey;
 }
@@ -53,7 +54,6 @@ body {
     margin: 0;
     /* background-color: var(--dark); */
     background-image: linear-gradient(var(--dark) 0%, var(--dark) 49%, var(--dark-accent) 50%, var(--dark) 60%);
-    perspective: 600px;
 }
 
 img {
@@ -65,7 +65,7 @@ img {
 #page {
     --bg: var(--light);
     --bg-accent: var(--light-accent);
-    --text: var(--dark);
+    --text: var(--dark-accent-3);
     --text-accent: var(--dark-accent);
     
     height: calc(100% - 100px);
@@ -247,7 +247,6 @@ p {
     visibility: hidden;
     z-index: 10;
     /* box-shadow: inset 2.5px 0 0 var(--text); */
-    perspective: 600px;
 }
 
 #arrow {
@@ -280,10 +279,13 @@ p {
 .scene {
     width: 100%;
     height: 100%;
-    perspective: inherit;
     position: absolute;
 
     visibility: hidden;
+}
+
+.perspective {
+    perspective: 600px;
 }
 
 .shadow img {
@@ -486,6 +488,91 @@ p {
     left: calc(37.5vw - 50px - 15vh);
 }
 
+/* PROJECTS */
+
+#terminal {
+    width: calc(75vw - 100px - 30vh - 125px);
+    height: calc(2 * (75vw - 100px - 30vh - 125px) / 3);
+    position: absolute;
+    top: calc(50vh - (2 * (75vw - 100px - 30vh - 125px) / 3) / 2 - 10px);
+    border: 10px solid var(--text);
+    /* background-color: var(--dark-accent-2); */
+    background-image: url("../images/aero_pix.png");
+    background-size: cover;
+}
+
+#laptopcontainer {
+    height: 30vh;
+    width: 30vh;
+    position: absolute;
+    bottom: 35vh;
+    right: calc(75px);
+    /* z-index: 2; */
+    --shadow-color: #888888;
+    --width: 75%;
+    perspective: 500px;
+}
+
+#laptop {
+    transform-style: preserve-3d;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transform-origin: center center -10vh;
+    image-rendering: pixelated;
+}
+
+.dark #laptop {
+    --shadow-color: #00286d;
+}
+
+#keyboard {
+    width: 30vh;
+    height: 30vh;
+    position: absolute;
+    bottom: 0;
+    transform-origin: bottom center;
+    transform: rotateX(90deg);
+    background-image: url("../images/keyboard.png");
+    background-size: cover;
+}
+
+.dark #keyboard {
+    background-image: url("../images/keyboard2.png");
+}
+
+#screen {
+    width: 30vh;
+    height: 30vh;
+    position: absolute;
+    bottom: 0;
+    transform-origin: bottom center;
+    transform: translateZ(-20vh) rotateX(15deg);
+    backface-visibility: hidden;
+    background-image: url("../images/screen.gif");
+    background-size: cover;
+}
+
+.dark #screen {
+    background-image: url("../images/screen2.gif");
+}
+
+#screenback {
+    width: 30vh;
+    height: 30vh;
+    position: absolute;
+    bottom: 0;
+    transform-origin: bottom center;
+    transform: translateZ(-20vh) rotateX(15deg) rotateY(180deg);
+    backface-visibility: hidden;
+    background-image: url("../images/screenback.png");
+    background-size: cover;
+}
+
+.dark #screenback {
+    background-image: url("../images/screenback2.png");
+}
+
 /* CONTACT */
 
 #plane {
@@ -621,7 +708,6 @@ p {
     bottom: calc(50vh - 7.5vw);
     right: 0;
     overflow: visible;
-    pointer-events: none;
 
     --shadow-color: #00286d;
     --width: 50%;
@@ -636,8 +722,7 @@ p {
     width: 15vw;
     position: absolute;
     bottom: calc(50vh - 7.5vw);
-    transform: translateY(calc(-50vh - 7.5vw));
-    animation: drop 5s 2.5s ease forwards, spin2 10s 7.5s steps(72, end) infinite;
+    animation: spin2 10s steps(72, end) infinite;
 }
 
 #sign2 {
@@ -645,24 +730,8 @@ p {
     width: 15vw;
     position: absolute;
     bottom: calc(50vh - 7.5vw);
-    transform: translateY(calc(-50vh - 7.5vw));
     rotate: y 90deg;
-    animation: drop 5s 2.5s ease forwards, spin3 10s 7.5s steps(72, end) infinite;
-}
-
-@keyframes drop {
-    0% {
-        transform: translateY(calc(-50vh - 7.5vw));
-    }
-    33% {
-        transform: translateY(calc(-15vh - 7.5vw));
-    }
-    67% {
-        transform: translateY(50px);
-    }
-    100% {
-        transform: translateY(0);
-    }
+    animation: spin3 10s steps(72, end) infinite;
 }
 
 @keyframes spin2 {

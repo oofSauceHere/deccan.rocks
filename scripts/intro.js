@@ -133,10 +133,10 @@ async function load_intro_cutscene() {
     const kiwitext = [
         ["omggg hello welcome to my website!"],
         ["here's some stuff about me", selectlink("about")],
-        ["here are some of my projects", selectlink("projects")],
-        ["here are my skills", selectlink("skills")],
-        ["here's my resume\n(download it)", selectlink("resume")],
-        ["and you can contact me at\nTHIS address", selectlink("contact")],
+        ["here's what i've been working on", selectlink("projects")],
+        ["this is my awesome screenplay", selectlink("scripts")],
+        ["this is where i complain about things", selectlink("blog")],
+        ["and you can find me here!", selectlink("contact")],
     ];
     for (const line of kiwitext) {
         const duration = type([line[0]], "text2");
@@ -209,8 +209,9 @@ async function load_simple() {
     GUAVA2.remove();
     document.getElementById("rainbowcontainer").remove();
     document.getElementById("main").style.visibility = "visible";
-    // document.getElementById("title").innerHTML = "deccan<br/>&nbsp;.rocks";
-    document.getElementById("title").innerHTML = "web<br/>&nbsp;world";
+    document.getElementById("page").style.setProperty("--text-shadow", "var(--bg-accent)");
+    document.getElementById("title").innerHTML = "deccan<br/>&nbsp;.rocks";
+    // document.getElementById("title").innerHTML = "web<br/>&nbsp;world";
     document.getElementById("copyright").innerHTML = "(c) 2026 Deccan. All Rights Reserved.";
     document.getElementsByTagName("title")[0].innerHTML = "deccan.rocks";
     document.getElementById("favicon").href = "images/favicon2.ico";
@@ -221,19 +222,34 @@ async function load_simple() {
     const scene_handler = {
         "projects": () => {
             document.getElementById("projectsscene").style.visibility = "visible";
-            const laptop = document.getElementById("laptop");
-            laptop.style.transform = "rotateY(135deg)";
-            laptop.animate([
-                {
-                    transform: "rotateY(135deg)",
-                }, {
-                    transform: "rotateY(315deg)",
-                }
-            ], {
-                duration: 500,
-                fill: "forwards",
-                easing: "ease-out",
+            window.scrollTo({
+                top: 0,
+                behavior: "instant",
             });
+            document.querySelectorAll(".laptop").forEach((el) => {
+                el.style.transform = "rotateY(calc(45deg*(var(--i) + 4))) translateZ(60vh)";
+                const intro_spin = el.animate([
+                    {
+                        transform: "rotateY(calc(45deg*(var(--i) + 4))) translateZ(60vh)",
+                    }, {
+                        transform: "rotateY(calc(45deg*var(--i))) translateZ(60vh)",
+                    }
+                ], {
+                    duration: 500,  
+                    fill: "forwards",
+                    easing: "ease-out",
+                });
+
+                intro_spin.onfinish = () => {
+                    intro_spin.cancel();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "instant",
+                    });
+                }
+            });
+            // theres room for better laptop z-index switching code here...
+
             // const screen = document.getElementById("screen");
             // screen.style.transform = "translateZ(-20vh) rotateX(-90deg)";
             // screen.animate([
@@ -247,21 +263,6 @@ async function load_simple() {
             //     fill: "forwards",
             //     easing: "ease-out",
             // });
-            const terminal = document.getElementById("terminal");
-            terminal.style.transform = "translateY(-50px)";
-            terminal.animate([
-                {
-                    transform: "translateY(-50px)",
-                    opacity: 0,
-                }, {
-                    transform: "translateY(0)",
-                    opacity: 1,
-                }
-            ], {
-                duration: 500,
-                fill: "forwards",
-                easing: "ease-out",
-            });
         },
         "contact": () => {
             document.getElementById("contactscene").style.visibility = "visible";

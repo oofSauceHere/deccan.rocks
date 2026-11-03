@@ -492,11 +492,13 @@ p {
 
 /* PROJECTS */
 
-#projectsscene > div {
+#laptops {
     position: absolute;
+    width: 100%;
+    height: 100%;
     bottom: 0;
-    /* right: -50%; */
-    right: 15%;
+    right: 0;
+    z-index: 1;
 }
 
 .laptopcontainer {
@@ -553,99 +555,91 @@ p {
 /* i really really tried to parameterize these wrt var(--i) but i couldnt. i just couldnt */
 
 @keyframes laptop1_switch_layer {
-    0% { z-index: 4; opacity: 1; }
-    12.5% { z-index: 3; opacity: 0.8; }
-    25% { z-index: 2; opacity: 0.6; }
-    37.5% { z-index: 1; opacity: 0.4; }
-    50% { z-index: 0; opacity: 0.2; }
-    62.5% { z-index: 1; opacity: 0.4; }
-    75% { z-index: 2; opacity: 0.6; }
-    87.5% { z-index: 3; opacity: 0.8; }
-    100% { z-index: 4; opacity: 1; }
+    0% { z-index: 4; }
+    14.28% { z-index: 3; }
+    28.57% { z-index: 2; }
+    42.85% { z-index: 1; }
+    57.14% { z-index: 0; }
+    71.42% { z-index: 1; }
+    85.71% { z-index: 2; }
+    100% { z-index: 3; }
 }
 
 @keyframes laptop2_switch_layer {
-    0% { z-index: 3; opacity: 0.8; }
-    12.5% { z-index: 4; opacity: 1; }
-    25% { z-index: 3; opacity: 0.8; }
-    37.5% { z-index: 2; opacity: 0.6; }
-    50% { z-index: 1; opacity: 0.4; }
-    62.5% { z-index: 0; opacity: 0.2; }
-    75% { z-index: 1; opacity: 0.4; }
-    87.5% { z-index: 2; opacity: 0.6; }
-    100% { z-index: 3; opacity: 0.8; }
-}
-
-@keyframes laptop3_switch_layer {
-    0% { z-index: 2; opacity: 0.6; }
-    12.5% { z-index: 3; opacity: 0.8; }
-    25% { z-index: 4; opacity: 1; }
-    37.5% { z-index: 3; opacity: 0.8; }
-    50% { z-index: 2; opacity: 0.6; }
-    62.5% { z-index: 1; opacity: 0.4; }
-    75% { z-index: 0; opacity: 0.2; }
-    87.5% { z-index: 1; opacity: 0.4; }
+    0% { z-index: 3; }
+    14.28% { z-index: 4; }
+    28.57% { z-index: 3; }
+    42.85% { z-index: 2; }
+    57.14% { z-index: 1; }
+    71.42% { z-index: 0; }
+    85.71% { z-index: 1; }
     100% { z-index: 2; }
 }
 
+@keyframes laptop3_switch_layer {
+    0% { z-index: 2; }
+    14.28% { z-index: 3; }
+    28.57% { z-index: 4; }
+    42.85% { z-index: 3; }
+    57.14% { z-index: 2; }
+    71.42% { z-index: 1; }
+    85.71% { z-index: 0; }
+    100% { z-index: 1; }
+}
+
 @keyframes laptop4_switch_layer {
-    0% { z-index: 1; opacity: 0.4; }
-    12.5% { z-index: 2; opacity: 0.6; }
-    25% { z-index: 3; opacity: 0.8; }
-    37.5% { z-index: 4; opacity: 1; }
-    50% { z-index: 3; opacity: 0.8; }
-    62.5% { z-index: 2; opacity: 0.6; }
-    75% { z-index: 1; opacity: 0.4; }
-    87.5% { z-index: 0; opacity: 0.2; }
-    100% { z-index: 1; opacity: 0.4; }
+    0% { z-index: 1; }
+    14.28% { z-index: 2; }
+    28.57% { z-index: 3; }
+    42.85% { z-index: 4; }
+    57.14% { z-index: 3; }
+    71.42% { z-index: 2; }
+    85.71% { z-index: 1; }
+    100% { z-index: 0; }
 }
 
 @keyframes laptop5_switch_layer {
-    0% { z-index: 0; opacity: 0.2; }
-    12.5% { z-index: 1; opacity: 0.4; }
-    25% { z-index: 2; opacity: 0.6; }
-    37.5% { z-index: 3; opacity: 0.8; }
-    50% { z-index: 4; opacity: 1; }
-    62.5% { z-index: 3; opacity: 0.8; }
-    75% { z-index: 2; opacity: 0.6; }
-    87.5% { z-index: 1; opacity: 0.4; }
-    100% { z-index: 0; opacity: 0.2; }
+    0% { z-index: 0; }
+    14.28% { z-index: 1; }
+    28.57% { z-index: 2; }
+    42.85% { z-index: 3; }
+    57.14% { z-index: 4; }
+    71.42% { z-index: 3; }
+    85.71% { z-index: 2; }
+    100% { z-index: 1; }
 }
 
 @keyframes laptop6_switch_layer {
-    0% { z-index: 1; opacity: 0.4; }
-    12.5% { z-index: 0; opacity: 0.2; }
-    25% { z-index: 1; opacity: 0.4; }
-    37.5% { z-index: 2; opacity: 0.6; }
-    50% { z-index: 3; opacity: 0.8; }
-    62.5% { z-index: 4; opacity: 1; }
-    75% { z-index: 3; opacity: 0.8; }
-    87.5% { z-index: 2; opacity: 0.6; }
-    100% { z-index: 1; opacity: 0.4; }
+    0% { z-index: 1; }
+    14.28% { z-index: 0; }
+    28.57% { z-index: 1; }
+    42.85% { z-index: 2; }
+    57.14% { z-index: 3; }
+    71.42% { z-index: 4; }
+    85.71% { z-index: 3; }
+    100% { z-index: 2; }
 }
 
 @keyframes laptop7_switch_layer {
-    0% { z-index: 2; opacity: 0.6; }
-    12.5% { z-index: 1; opacity: 0.4; }
-    25% { z-index: 0; opacity: 0.2; }
-    37.5% { z-index: 1; opacity: 0.4; }
-    50% { z-index: 2; opacity: 0.6; }
-    62.5% { z-index: 3; opacity: 0.8; }
-    75% { z-index: 4; opacity: 1; }
-    87.5% { z-index: 3; opacity: 0.8; }
-    100% { z-index: 2; opacity: 0.6; }
+    0% { z-index: 2; }
+    14.28% { z-index: 1; }
+    28.57% { z-index: 0; }
+    42.85% { z-index: 1; }
+    57.14% { z-index: 2; }
+    71.42% { z-index: 3; }
+    85.71% { z-index: 4; }
+    100% { z-index: 3; }
 }
 
 @keyframes laptop8_switch_layer {
-    0% { z-index: 3; opacity: 0.8; }
-    12.5% { z-index: 2; opacity: 0.6; }
-    25% { z-index: 1; opacity: 0.4; }
-    37.5% { z-index: 0; opacity: 0.2; }
-    50% { z-index: 1; opacity: 0.4; }
-    62.5% { z-index: 2; opacity: 0.6; }
-    75% { z-index: 3; opacity: 0.8; }
-    87.5% { z-index: 4; opacity: 1; }
-    100% { z-index: 3; opacity: 0.8; }
+    0% { z-index: 3; }
+    12.5% { z-index: 2; }
+    28.57% { z-index: 1; }
+    42.85% { z-index: 0; }
+    57.14% { z-index: 1; }
+    71.42% { z-index: 2; }
+    85.71% { z-index: 3; }
+    100% { z-index: 4; }
 }
 
 .laptop {
@@ -665,7 +659,7 @@ p {
         transform: rotateY(calc(45deg*var(--i))) translateZ(60vh);
     }
     to {
-        transform: rotateY(calc(45deg*(var(--i)) - 360deg)) translateZ(60vh);
+        transform: rotateY(calc(45deg*(var(--i)) - 315deg)) translateZ(60vh);
     }
 }
 
@@ -695,7 +689,7 @@ p {
     bottom: 0;
     transform-origin: bottom center;
     transform: translateZ(-20vh) rotateX(15deg);
-    /* transform: translateZ(-20vh) rotateX(calc(-90deg + (4 - abs(calc(var(--i) - 4)))*10deg)); */
+    /* transform: translateZ(-20vh) rotateX(calc(-90deg + (4 - abs(calc(var(--i) - 4)))*15deg)); */
     backface-visibility: hidden;
     background-image: url("../images/screen.gif");
     background-size: cover;
@@ -712,7 +706,7 @@ p {
     bottom: 0;
     transform-origin: bottom center;
     transform: translateZ(-20vh) rotateX(15deg) rotateY(180deg);
-    /* transform: translateZ(-20vh) rotateX(calc(-90deg + (4 - abs(calc(var(--i) - 4)))*10deg)) rotateY(180deg); */
+    /* transform: translateZ(-20vh) rotateX(calc(-90deg + (4 - abs(calc(var(--i) - 4)))*15deg)) rotateY(180deg); */
     backface-visibility: hidden;
     background-image: url("../images/screenback.png");
     background-size: cover;
@@ -720,6 +714,111 @@ p {
 
 .dark .screenback {
     background-image: url("../images/screenback2.png");
+}
+
+#showcase {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    animation: showcase_switch_layer steps(1, end) both;
+    animation-timeline: scroll(root);
+}
+
+@keyframes showcase_switch_layer {
+    0% { --scroll: 0; }
+    14.28% { --scroll: 1; }
+    28.57% { --scroll: 2; }
+    42.85% { --scroll: 3; }
+    57.14% { --scroll: 4; }
+    71.42% { --scroll: 5; }
+    85.71% { --scroll: 6; }
+    100% { --scroll: 7; }
+}
+
+#showcase {
+    z-index: 2;
+    /* display: flex;
+    align-items: center; */
+}
+
+.infocard {
+    width: calc(100% - 80vh);
+    height: calc(100% - 100px);
+    position: absolute;
+    top: 50px;
+    display: if(style(--scroll: var(--i)): block; else: none);
+}
+
+.blob {
+    color: var(--text);
+    position: absolute;
+    top: calc((75vw - 100px - 80vh) * 3 / 4 + 50px);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.date {
+    color: var(--text);
+    position: absolute;
+    bottom: 0;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.terminal {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 5px solid var(--text);
+    position: absolute;
+    top: 0;
+}
+
+.terminal > img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    filter: sepia(1) brightness(0.5);
+}
+
+.terminal h1 {
+    color: greenyellow;
+    font-family: Timetwist;
+    text-align: right;
+    width: calc(100% - 15px);
+    position: absolute;
+    right: 15px;
+    font-size: 2rem;
+}
+
+.terminal h2 {
+    color: greenyellow;
+    bottom: 10px;
+    position: absolute;
+    width: calc(100% - 15px);
+    left: 15px;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.go {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.terminal h3 {
+    color: greenyellow;
+    font-family: "Bold Pixels";
+    font-size: 10rem;
+    margin: 0;
+    cursor: var(--pointer);
+}
+
+.terminal h3:hover {
+    transform: scale(110%);
 }
 
 /* CONTACT */
@@ -872,7 +971,7 @@ p {
     width: 15vw;
     position: absolute;
     bottom: calc(50vh - 7.5vw);
-    animation: spin2 10s steps(72, end) infinite;
+    animation: spin2 10s linear infinite;
 }
 
 #sign2 {
@@ -881,7 +980,7 @@ p {
     position: absolute;
     bottom: calc(50vh - 7.5vw);
     rotate: y 90deg;
-    animation: spin3 10s steps(72, end) infinite;
+    animation: spin3 10s linear infinite;
 }
 
 @keyframes spin2 {

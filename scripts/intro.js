@@ -226,8 +226,41 @@ async function load_simple() {
                 top: 0,
                 behavior: "instant",
             });
+            document.getElementById("laptops").animate([
+                {
+                    right: "0",
+                }, {
+                    right: "-50%",
+                }
+            ], {
+                duration: 1000,
+                fill: "forwards",
+                easing: "ease-out",
+            })
+            document.querySelectorAll(".laptopcontainer").forEach((el, i) => {
+                const intro_spin = el.animate([
+                    {
+                        zIndex: Math.abs((i + 4)%8 - 4),
+                    }, {
+                        zIndex: Math.abs((i + 3)%8 - 4),
+                    }, {
+                        zIndex: Math.abs((i + 2)%8 - 4),
+                    }, {
+                        zIndex: Math.abs((i + 1)%8 - 4),
+                    }, {
+                        zIndex: Math.abs(i - 4),
+                    }
+                ], {
+                    duration: 1000,  
+                    fill: "forwards",
+                    easing: "ease-out",
+                });
+
+                intro_spin.onfinish = () => {
+                    intro_spin.cancel();
+                }
+            });
             document.querySelectorAll(".laptop").forEach((el) => {
-                el.style.transform = "rotateY(calc(45deg*(var(--i) + 4))) translateZ(60vh)";
                 const intro_spin = el.animate([
                     {
                         transform: "rotateY(calc(45deg*(var(--i) + 4))) translateZ(60vh)",
@@ -235,7 +268,7 @@ async function load_simple() {
                         transform: "rotateY(calc(45deg*var(--i))) translateZ(60vh)",
                     }
                 ], {
-                    duration: 500,  
+                    duration: 1000,  
                     fill: "forwards",
                     easing: "ease-out",
                 });
@@ -248,6 +281,23 @@ async function load_simple() {
                     });
                 }
             });
+            document.getElementById("showcase").animate([
+                {
+                    transform: "translateY(-50px)",
+                    opacity: 0,
+                }, {
+                    transform: "translateY(-50px)",
+                    opacity: 0,
+                }, {
+                    transform: "translateY(0)",
+                    opacity: 1,
+                }
+            ], {
+                duration: 1000,  
+                fill: "forwards",
+                easing: "ease-out",
+            });
+
             // theres room for better laptop z-index switching code here...
 
             // const screen = document.getElementById("screen");

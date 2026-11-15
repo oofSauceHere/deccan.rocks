@@ -220,7 +220,11 @@ async function load_simple() {
     document.querySelectorAll(".scene")[CURRENT_SCENE].style.visibility = "visible";
 
     const scene_handler = {
+        "about": () => {
+
+        },
         "projects": () => {
+            document.body.style.height = "500vh";
             document.getElementById("projectsscene").style.visibility = "visible";
             window.scrollTo({
                 top: 0,
@@ -230,13 +234,13 @@ async function load_simple() {
                 {
                     right: "0",
                 }, {
-                    right: "-50%",
+                    right: "-40%",
                 }
             ], {
                 duration: 1000,
                 fill: "forwards",
                 easing: "ease-out",
-            })
+            });
             document.querySelectorAll(".laptopcontainer").forEach((el, i) => {
                 const intro_spin = el.animate([
                     {
@@ -281,6 +285,48 @@ async function load_simple() {
                     });
                 }
             });
+            // document.querySelectorAll(".screen").forEach((el) => {
+            //     const intro_spin = el.animate([
+            //         {
+            //             transform: "translateZ(-20vh) rotateX(-90deg)",
+            //         }, {
+            //             transform: "translateZ(-20vh) rotateX(15deg)",
+            //         }
+            //     ], {
+            //         duration: 1000,  
+            //         fill: "forwards",
+            //         easing: "ease-out",
+            //     });
+
+            //     intro_spin.onfinish = () => {
+            //         intro_spin.cancel();
+            //         window.scrollTo({
+            //             top: 0,
+            //             behavior: "instant",
+            //         });
+            //     }
+            // });
+            // document.querySelectorAll(".screenback").forEach((el) => {
+            //     const intro_spin = el.animate([
+            //         {
+            //             transform: "translateZ(-20vh) rotateX(-90deg) rotateY(180deg)",
+            //         }, {
+            //             transform: "translateZ(-20vh) rotateX(15deg) rotateY(180deg)",
+            //         }
+            //     ], {
+            //         duration: 1000,  
+            //         fill: "forwards",
+            //         easing: "ease-out",
+            //     });
+
+            //     intro_spin.onfinish = () => {
+            //         intro_spin.cancel();
+            //         window.scrollTo({
+            //             top: 0,
+            //             behavior: "instant",
+            //         });
+            //     }
+            // });
             document.getElementById("showcase").animate([
                 {
                     transform: "translateY(-50px)",
@@ -314,6 +360,46 @@ async function load_simple() {
             //     easing: "ease-out",
             // });
         },
+        "scripts": () => {
+            document.getElementById("scriptsscene").style.visibility = "visible";
+            document.getElementById("menu").style.display = "block";
+            document.getElementById("screensaver").style.display = "none";
+            document.getElementById("tv").animate([
+                {
+                    transform: "translateY(-50px)",
+                    opacity: 0,
+                }, {
+                    transform: "translateY(0)",
+                    opacity: 1,
+                }
+            ], {
+                duration: 500,  
+                fill: "forwards",
+                easing: "ease-out",
+            });
+        },
+        "blog": () => {
+            document.getElementById("blogscene").style.visibility = "visible";
+            document.getElementById("notes").style.display = "block";
+            document.getElementById("entries").style.display = "none";
+            document.getElementById("entries").scrollTo({
+                top: 0,
+                behavior: "instant",
+            });
+            document.querySelectorAll(".entry").forEach(entry => {
+                entry.style.display = "none";
+            });
+            document.querySelectorAll(".note").forEach((note, i) => {
+                note.style.display = "none";
+                setTimeout(() => {
+                    note.style.display = "block";
+                    note.style.animation = "pop 0.2s steps(1) forwards";
+                }, 200*i);
+                setTimeout(() => {
+                    note.style.animation = "";
+                }, 200*(i+1));
+            });
+        },
         "contact": () => {
             document.getElementById("contactscene").style.visibility = "visible";
             const contactform = document.getElementById("contactform");
@@ -344,6 +430,8 @@ async function load_simple() {
         document.querySelectorAll(".scene").forEach((el2) => {
             el2.style.visibility = "hidden";
         });
+
+        document.body.style.height = "100vh";
             
         if(e.target.id != "title") {
             e.target.style.marginLeft = "auto";
@@ -383,6 +471,10 @@ async function load_complex() {
     setTimeout(() => {
         load_simple();
     }, 1000);
+
+    // actually lol
+    // it can play a super "laggy" loading anim and then be like
+    // "whoops! looks like we forgot to optimize!"
 
     // document.getElementById("loading").style.display = "block";
     // setTimeout(() => {
@@ -468,6 +560,46 @@ function toggle_mode() {
     MODE = 1 - MODE;
     document.getElementById("switch").src = MODE == 0 ? "images/switch_on.png" : "images/switch_off.png";
     document.getElementById("page").classList.toggle("dark");
+}
+
+function load_sunny() {
+    load_misc();
+}
+
+function load_misc() {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("screensaver").style.display = "flex";
+}
+
+function open_note(i) {
+    document.getElementById("notes").style.display = "none";
+    document.getElementById("entries").style.display = "block";
+    document.querySelectorAll(".entry")[i].style.display = "block";
+    document.getElementById("entries").scrollTo({
+        top: 0,
+        behavior: "instant",
+    });
+    document.querySelectorAll(".entry")[i].animate([
+        {
+            transform: "translateY(-50px)",
+            opacity: 0,
+        }, {
+            transform: "translateY(0)",
+            opacity: 1,
+        }
+    ], {
+        duration: 500,  
+        fill: "forwards",
+        easing: "ease-out",
+    });
+}
+
+function go_back() {
+    document.getElementById("notes").style.display = "block";
+    document.getElementById("entries").style.display = "none";
+    document.querySelectorAll(".entry").forEach(entry => {
+        entry.style.display = "none";
+    });
 }
 
 window.onload = () => {

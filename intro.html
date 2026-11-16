@@ -12,6 +12,7 @@
     <body>
         <!-- INTRO SEQUENCE -->
         <!-- students of the craft! try not to put 5 minute cutscenes in your website... -->
+
         <div id="intro">
             <div id="left">
                 <div id="guava" class="shadow">
@@ -36,6 +37,7 @@
         </div>
 
         <!-- MAIN CONTENT -->
+
         <div id="page">
             <div id="rainbowcontainer">
                 <div id="rainbow"></div>
@@ -43,7 +45,6 @@
             <img id="kiwi" src="images/kiwi/kiwi_1.gif" draggable="false"/>
             <img id="guava2" src="images/guava/guava_0.gif" draggable="false"/>
             <div id="sidebar">
-                <!-- <div id="grid"><div></div></div> -->
                 <h1 id="title">kiwi<br/>&nbsp;.rocks</h1>
                 <!-- i seem to have forgotten about the "nav" element -->
                 <div id="nav">
@@ -56,9 +57,8 @@
                 <p id="copyright">(c) 2026 Kiwi. No rights reserved.</p>
             </div>
             <div id="main">
-                <!-- <img id="hexagon" src="images/hexagon.png" draggable="false"/> -->
-
                 <!-- fun scenes with kiwi & guava! -->
+
                 <div class="skit scene">
                     <img id="kiwi_guava" src="images/kiwi_guava.gif" draggable="false"/>
                 </div>
@@ -90,15 +90,34 @@
                     </div>
                     <div id="kiwi_test2" class="shadow">
                         <div>
-                            <img src="images/kiwi/kiwi_2.png" draggable="false"/>
+                            <img src="images/kiwi/kiwi_3.gif" draggable="false"/>
                         </div>
                         <!-- text goes here -->
                     </div>
-                    <img id="crawler" src="images/crawler.gif" draggable="false"/>
+                    <img id="olive" src="images/crawler.gif" draggable="false"/>
                 </div>
 
-                <div id="aboutscene" class="scene">
+                <!-- now, actual content -->
 
+                <div id="aboutscene" class="scene">
+                    <div id="blurb">
+                        <h1>About Me</h1>
+                        <p>
+                            Hey! I'm Deccan, and I used to pay to study computer engineering at the University of Southern California. Now, the 
+                            industry pays me to study it for the rest of my life.
+                            <br/><br/>
+                            I'm familiar with distributed systems, frontend and backend development, and writing Python scripts to do whatever I'm 
+                            too lazy to do myself. Though, if you want a formal list, <a href="#">here's my resume</a>.
+                            <br/><br/>
+                            I also minored in film and spent a bunch of time writing the other kind of scripts for fun (and sometimes for class, 
+                            with really talented people at USC's cinematic arts school)! I love sitcoms, which you'll quickly find out if you 
+                            check out the scripts tab. But, if you must know, my favorites are <i>Arrested Development</i> and <i>Scrubs</i>!
+                        </p>
+                    </div>
+                    <div id="cover">
+                        <img id="kiwi2" src="images/kiwi/kiwi_2.gif"/>
+                    </div>
+                    <img id="kiwidesk2" src="images/kiwidesk2.gif" draggable="false"/>
                 </div>
 
                 <div id="projectsscene" class="scene">
@@ -107,7 +126,6 @@
                             <div class="laptop">
                                 <div style="background-image: url('images/laptop/keyboard1.png');" class="keyboard"></div>
                                 <div style="background-image: url('images/laptop/screen1.gif');" class="screen"></div>
-                                <!-- <div style="background-image: url('images/proj1_pix.png');" class="screencontent"></div> -->
                                 <div style="background-image: url('images/laptop/screenback1.png');" class="screenback"></div>
                             </div>
                         </div>
@@ -115,7 +133,6 @@
                             <div class="laptop">
                                 <div style="background-image: url('images/laptop/keyboard2.png');" class="keyboard"></div>
                                 <div style="background-image: url('images/laptop/screen2.gif');" class="screen"></div>
-                                <!-- <div style="background-image: url('images/proj2_pix.png');" class="screencontent"></div> -->
                                 <div style="background-image: url('images/laptop/screenback2.png');" class="screenback"></div>
                             </div>
                         </div>
@@ -123,7 +140,6 @@
                             <div class="laptop">
                                 <div style="background-image: url('images/laptop/keyboard3.png');" class="keyboard"></div>
                                 <div style="background-image: url('images/laptop/screen3.gif');" class="screen"></div>
-                                <!-- <div style="background-image: url('images/proj3_pix.png');" class="screencontent"></div> -->
                                 <div style="background-image: url('images/laptop/screenback3.png');" class="screenback"></div>
                             </div>
                         </div>
@@ -131,7 +147,6 @@
                             <div class="laptop">
                                 <div style="background-image: url('images/laptop/keyboard4.png');" class="keyboard"></div>
                                 <div style="background-image: url('images/laptop/screen4.gif');" class="screen"></div>
-                                <!-- <div style="background-image: url('images/proj4_pix.png');" class="screencontent"></div> -->
                                 <div style="background-image: url('images/laptop/screenback4.png');" class="screenback"></div>
                             </div>
                         </div>
@@ -311,21 +326,24 @@
                         <div class="note" style="top: 100px; left: 500px;" onclick="open_note(1);"></div>
                     </div>
                     <div id="entries">
-                        <div class="entry">
+                        <div class="entry" style="--accent: #bf0022;">
                             <!-- TODO: should be handled by js, reading from txt files -->
                             <div class="header">
-                                <h1>introduction</h1>
+                                <h1>why blog?</h1>
                             </div>
                             <div class="words">
                                 <p>
-                                    I don't blog for fun. I blog because I have to.
+                                    Alright, let's get serious. I don't blog for fun. I blog because I have to.
                                     <br/><br/>
-                                    LMAO that's lame. That would be so lame to say that. Imagine if I said that lol.
+                                    ...
                                     <br/><br/>
-                                    If you want to hear me talk about things, this is where you'd do that! Try not to take these too seriously. 
-                                    (It's a bad look.)
+                                    LMAO that's lame. That would be so lame to say that. Imagine if I said that. LOL.
                                     <br/><br/>
-                                    Okay bye
+                                    Look, if you want to hear me talk about things, this is where you'd do that! Fair warning: I write to 
+                                    "understand" myself, but also to entertain you. So, you know, try not to take these too seriously. (You won't 
+                                    get very far.)
+                                    <br/><br/>
+                                    okay bye
                                     <br/><br/>
                                     11/14/26
                                     <br/><br/>
@@ -333,11 +351,10 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="entry">
+                        <div class="entry" style="--accent: #ff65c4;">
                             <div class="header">
                                 <h1>eulogy to sprinkles cupcakes</h1>
                             </div>
-                            <!-- TODO: fix weird scroll glitch -->
                             <div class="words">
                                 <p>
                                     I feel bad for this stupid little cucumber on my birthday card, staring at me, so happy for me. "You're as 
@@ -431,10 +448,12 @@
                     </div>
                 </div>
 
+                <!-- dark mode -->
+
                 <img id="switch" onclick="toggle_mode()" src="images/switch_on.png"/>
             </div>
 
-            <!-- kiwi can walk through her bio and resume -->
+            <!-- TODO: kiwi can walk through her bio -->
             <h2 id="text2" class="text"></h2>
             <h2 id="text3" class="text"></h2>
         </div>

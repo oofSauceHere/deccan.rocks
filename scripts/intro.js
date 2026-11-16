@@ -15,10 +15,10 @@ const DIALOGUE =  VISITED ? [
     ["...what? Oh, sorry, I'm Guava.\nThis is not my website."],
     ["Officially, I'm the webmaster,\nwhich means something, I think."],
     ["It definitely looks good on a resume.\nSpeaking of resumes..."],
-    ["This is not a walking talking resume.\nIt's barely a portfolio."],
+    ["This is not a walking, talking resume.\nIt's barely a portfolio."],
     ["So, if that's what you're here for...\nWell, here you go."],
     ["And if that's not what you're here for...\nYou'll get to meet Kiwi!"],
-    ["Who's currently hard at work getting things ready.\nI think.", (char) => {
+    ["She's currently hard at work getting things ready.\nI think.", (char) => {
         if (char == '.') {
             setTimeout(() => {
                 document.getElementById("right").style.visibility = "visible";
@@ -47,6 +47,7 @@ let CURRENT_DIALOGUE = 0;
 let TIMEOUTS = [];
 let MODE = 0; // light / dark
 let CURRENT_SCENE = 0;
+let VISITED_ABOUT = 0; // change later?
 
 // play typewriter effect on text
 function type(line, name) {
@@ -189,6 +190,138 @@ async function load_intro_cutscene() {
     }
 }
 
+async function load_about() {
+    // cutscene plays here, and i'm too lazy to worry about it resetting when the tab changes,
+    // so we'll just lock you into it
+    document.getElementById("sidebar").style.pointerEvents = "none";
+
+    document.getElementById("blurb").animate([
+        {
+            transform: "translateY(-50px)",
+            opacity: 0,
+        }, {
+            transform: "translateY(0)",
+            opacity: 1,
+        }
+    ], {
+        duration: 500,
+        fill: "forwards",
+        easing: "ease-out",
+    });
+    document.getElementById("cover").style.transform = "translateX(200%)";
+    document.getElementById("kiwi2").animate([
+        {
+            right: "-15vw",
+        }, {
+            right: "calc(50vw - (12.5vw + 50px))",
+        }
+    ], {
+        duration: 1000,
+        delay: 2500,
+        fill: "forwards",
+        easing: "ease-out",
+    });
+    document.getElementById("text2").style.display = "block";
+    await delay(3500);
+    let duration = type(["ugh, not this..."], "text2");
+    await delay(duration + 1500);
+    document.getElementById("text2").innerHTML = "";
+    document.getElementById("text2").style.display = "none";
+    document.getElementById("kiwi2").animate([
+        {
+            right: "calc(50vw - (12.5vw + 50px))",
+        }, {
+            right: "-15vw",
+        }
+    ], {
+        duration: 1000,
+        fill: "forwards",
+        easing: "ease-out",
+    });
+    await delay(2500);
+    const cover = document.getElementById("cover").animate([
+        {
+            transform: "translateX(200%)",
+        }, {
+            transform: "translateX(0)",
+        }
+    ], {
+        duration: 1500,
+        fill: "forwards",
+        easing: "ease-out",
+    });
+    cover.onfinish = () => {
+        cover.cancel();
+        document.getElementById("cover").style.transform = "translateX(0)";
+    }
+    await delay(1500);
+    document.getElementById("kiwi2").animate([
+        {
+            right: "-15vw",
+        }, {
+            right: "calc(-50vw + (12.5vw + 50px))",
+        }
+    ], {
+        duration: 1000,
+        fill: "forwards",
+        easing: "ease-out",
+    });
+    await delay(1000);
+
+    const dialogue = [
+        ["there we go! (yes it's silly but it's all i had)"],
+        ["but you know what's sillier? distilling someone’s entire self into 2-3 tiny little paragraphs."],
+        ["surely most of what makes him him ends up hidden away. talk about abstraction..."],
+        ["here, i'll just give you the witty elevator pitch and call it a day", () => {
+            setTimeout(() => {
+                document.getElementById("cover").style.backgroundImage = "none";
+                document.getElementById("blurb").innerHTML = "<h1>About Me</h1><p style='font-size: 2.5rem;'>I WRITE SCRIPTS!!!</p>";
+            }, 500);
+        }],
+        ["wow, just 3 words and it’s like you’ve known him for years!"],
+        ["isn't this entire website kind of an \"about me\" anyways? who needs this. in fact...", () => {
+            setTimeout(() => {
+                document.getElementById("about").innerHTML = ">>";
+                document.getElementById("blurb").innerHTML = "";
+            }, 500);
+        }],
+        ["...see? this is better, right?"],
+        ["okay nvm guava will be pissed!!!", () => {
+            document.getElementById("about").innerHTML = ">> about";
+            document.getElementById("blurb").innerHTML = "<h1>About Me</h1><p style='font-size: 2.5rem;'>I WRITE SCRIPTS!!!</p>";
+        }],
+        ["no, you know what? i'm redoing it. the whole thing."],
+    ];
+
+    document.getElementById("text2").style.display = "block";
+    for (const line of dialogue) {
+        duration = type(line, "text2");
+        await delay(duration);
+        line[1]?.();
+        await delay(Math.max(3000-duration, duration*0.5));
+    }
+
+    document.getElementById("text2").innerHTML = "";
+    document.getElementById("text2").style.display = "none";
+    document.getElementById("kiwi2").animate([
+        {
+            right: "calc(-50vw + (12.5vw + 50px))",
+        }, {
+            right: "calc(-50vw + (12.5vw + 50px) - 15vw)",
+        }
+    ], {
+        duration: 1000,
+        fill: "forwards",
+        easing: "ease-out",
+    });
+
+    await delay(2500);
+    document.getElementById("kiwidesk2").style.display = "block";
+
+    // ...and you can have nav access back
+    document.getElementById("sidebar").style.pointerEvents = "";
+}
+
 // loading page for simple version of site
 async function load_simple() {
     if (!VISITED) {
@@ -216,12 +349,20 @@ async function load_simple() {
     document.getElementsByTagName("title")[0].innerHTML = "deccan.rocks";
     document.getElementById("favicon").href = "images/favicon2.ico";
     document.getElementById("text2").innerHTML = "";
+    document.getElementById("text2").style.display = "none";
+    document.getElementById("text2").style.color = "var(--text)";
     document.getElementById("text3").innerHTML = "";
+    document.getElementById("text3").style.display = "none";
+    document.getElementById("text3").style.color = "var(--text)";
     document.querySelectorAll(".scene")[CURRENT_SCENE].style.visibility = "visible";
 
     const scene_handler = {
         "about": () => {
-
+            document.getElementById("aboutscene").style.visibility = "visible";
+            if (!VISITED_ABOUT) {
+                load_about();
+                VISITED_ABOUT = 1;
+            }
         },
         "projects": () => {
             document.body.style.height = "500vh";
@@ -285,48 +426,6 @@ async function load_simple() {
                     });
                 }
             });
-            // document.querySelectorAll(".screen").forEach((el) => {
-            //     const intro_spin = el.animate([
-            //         {
-            //             transform: "translateZ(-20vh) rotateX(-90deg)",
-            //         }, {
-            //             transform: "translateZ(-20vh) rotateX(15deg)",
-            //         }
-            //     ], {
-            //         duration: 1000,  
-            //         fill: "forwards",
-            //         easing: "ease-out",
-            //     });
-
-            //     intro_spin.onfinish = () => {
-            //         intro_spin.cancel();
-            //         window.scrollTo({
-            //             top: 0,
-            //             behavior: "instant",
-            //         });
-            //     }
-            // });
-            // document.querySelectorAll(".screenback").forEach((el) => {
-            //     const intro_spin = el.animate([
-            //         {
-            //             transform: "translateZ(-20vh) rotateX(-90deg) rotateY(180deg)",
-            //         }, {
-            //             transform: "translateZ(-20vh) rotateX(15deg) rotateY(180deg)",
-            //         }
-            //     ], {
-            //         duration: 1000,  
-            //         fill: "forwards",
-            //         easing: "ease-out",
-            //     });
-
-            //     intro_spin.onfinish = () => {
-            //         intro_spin.cancel();
-            //         window.scrollTo({
-            //             top: 0,
-            //             behavior: "instant",
-            //         });
-            //     }
-            // });
             document.getElementById("showcase").animate([
                 {
                     transform: "translateY(-50px)",
@@ -344,21 +443,7 @@ async function load_simple() {
                 easing: "ease-out",
             });
 
-            // theres room for better laptop z-index switching code here...
-
-            // const screen = document.getElementById("screen");
-            // screen.style.transform = "translateZ(-20vh) rotateX(-90deg)";
-            // screen.animate([
-            //     {
-            //         transform: "translateZ(-20vh) rotateX(-90deg)",
-            //     }, {
-            //         transform: "translateZ(-20vh) rotateX(15deg)",
-            //     }
-            // ], {
-            //     duration: 500,
-            //     fill: "forwards",
-            //     easing: "ease-out",
-            // });
+            // TODO: better laptop z-index switching code (aka fix the horrific css mess)?
         },
         "scripts": () => {
             document.getElementById("scriptsscene").style.visibility = "visible";
@@ -424,7 +509,7 @@ async function load_simple() {
         document.querySelectorAll(".navitem").forEach((el) => {
             el.style.marginLeft = "0";
             el.innerHTML = `${el.id}`;
-            el.style.pointerEvents = "auto";
+            el.style.pointerEvents = "";
         });
 
         document.querySelectorAll(".scene").forEach((el2) => {
@@ -543,7 +628,7 @@ function advance() {
 
 function start() {
     GUAVA.onclick = "";
-    GUAVA.style.pointerEvents = "none";
+    document.getElementById("guava").style.pointerEvents = "none"; // remember, container wrapping
     GUAVA.src = "images/guava/guava_wake.gif";
     document.getElementById("sign").style.animation = "spin2 10s steps(72, end) infinite, leave 0.3s ease-out forwards, leave2 0.6s 0.3s ease-in forwards, jiggle 0.9s linear forwards";
     document.getElementById("sign2").style.animation = "spin3 10s steps(72, end) infinite, leave 0.3s ease-out forwards, leave2 0.6s 0.3s ease-in forwards, jiggle 0.9s linear forwards";
